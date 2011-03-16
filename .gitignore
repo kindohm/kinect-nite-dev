@@ -10,4 +10,6 @@ _ReSharper.*
 *.cache
 *.xap
 !$KinectDev.pptx
+~$KinectDev.pptx
+
 
