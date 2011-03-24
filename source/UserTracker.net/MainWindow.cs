@@ -40,12 +40,20 @@ namespace UserTracker.net
 			this.histogram = new int[this.depth.GetDeviceMaxDepth()];
 
 			MapOutputMode mapMode = this.depth.GetMapOutputMode();
+            
+            Swipe.Initialize();
+            //Swipe.SwipeCaptured += new EventHandler<SwipeEventArgs>(Swipe_SwipeCaptured);
 
 			this.bitmap = new Bitmap((int)mapMode.nXRes, (int)mapMode.nYRes/*, System.Drawing.Imaging.PixelFormat.Format24bppRgb*/);
 			this.shouldRun = true;
 			this.readerThread = new Thread(ReaderThread);
 			this.readerThread.Start();
 		}
+
+        void Swipe_SwipeCaptured(object sender, SwipeEventArgs e)
+        {
+            this.label1.Text = "SWIPE!! " + DateTime.Now.ToString();
+        }
 
         void skeletonCapbility_CalibrationEnd(ProductionNode node, uint id, bool success)
         {
@@ -87,6 +95,13 @@ namespace UserTracker.net
 					this.panelView.Location.Y,
 					this.panelView.Size.Width,
 					this.panelView.Size.Height);
+
+                if (Swipe.Swiped)
+                {
+                    Swipe.Swiped = false;
+                    this.label1.Text = "Swipe " + Swipe.Direction.ToString() + " " + DateTime.Now.ToString();
+                }
+
             }
 		}
 
@@ -276,7 +291,6 @@ namespace UserTracker.net
 					Rectangle rect = new Rectangle(0, 0, this.bitmap.Width, this.bitmap.Height);
 					BitmapData data = this.bitmap.LockBits(rect, ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
-
                     if (this.shouldDrawPixels)
                     {
                         ushort* pDepth = (ushort*)this.depth.GetDepthMapPtr().ToPointer();
@@ -333,7 +347,12 @@ namespace UserTracker.net
                         }
 
                         if (this.shouldDrawSkeleton && this.skeletonCapbility.IsTracking(user))
+                        {
                             DrawSkeleton(g, anticolors[user % ncolors], user);
+                            var userJoints = this.joints[user];
+                            var currentPoint = userJoints[SkeletonJoint.RightHand].position;
+                            Swipe.AddSwipePoint(currentPoint);
+                        }
 
                     }
                     g.Dispose();
