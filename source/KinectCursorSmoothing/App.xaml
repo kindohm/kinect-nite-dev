@@ -1,0 +1,14 @@
+﻿<Application x:Class="KinectCursorSmoothing.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Color x:Key="LightGreen" A="255" R="61" G="118" B="39"/>
+        <Color x:Key="DarkGreen" A="255" R="31" G="59" B="19"/>
+    </Application.Resources>
+</Application>

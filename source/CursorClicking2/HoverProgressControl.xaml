@@ -1,0 +1,64 @@
+﻿<UserControl 
+    x:Class="CursorClicking2.HoverProgressControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d">
+    <!--
+    
+    This Path and arc animation code borrowed from:
+    http://social.msdn.microsoft.com/forums/en-US/wpf/thread/f4313fdc-cc05-4647-8661-3d9eea7052f6/
+    
+    Thank you Charles Petzold.
+    -->
+    <UserControl.Resources>
+        <Storyboard 
+            TargetName="arc" 
+            x:Key="storyboard"
+            BeginTime="0:0:0.700"
+            >
+            <PointAnimationUsingPath
+                Storyboard.TargetProperty="Point"
+                Duration="0:0:1.500">
+                <PointAnimationUsingPath.PathGeometry>
+                    <PathGeometry
+                        Figures="M 0 -35 A 35 35 0 0 1 0 35
+                        A 35 35 0 0 1 -1 -35" />
+                </PointAnimationUsingPath.PathGeometry>
+            </PointAnimationUsingPath>
+            <BooleanAnimationUsingKeyFrames
+                Storyboard.TargetProperty="IsLargeArc"
+                Duration="0:0:1.50">
+                <DiscreteBooleanKeyFrame 
+                    KeyTime="0:0:0" 
+                    Value="False" />
+                <DiscreteBooleanKeyFrame 
+                    KeyTime="0:0:0.750" 
+                    Value="True" />
+            </BooleanAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid 
+        IsHitTestVisible="False">
+        <Path
+            Fill="Green"
+            Stroke="Transparent">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure 
+                        StartPoint="0 0"
+                        IsClosed="True">
+                        <LineSegment 
+                            Point="0 -35" />
+                        <ArcSegment 
+                            x:Name="arc"
+                            Point="0,-35"
+                            Size="35 35"
+                            SweepDirection="ClockWise" />
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+    </Grid>
+</UserControl>
