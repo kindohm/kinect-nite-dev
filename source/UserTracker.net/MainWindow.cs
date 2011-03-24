@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
+using System.Drawing.Imaging;
+using System.Threading;
 using System.Windows.Forms;
 using xn;
-using System.Threading;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
 
 namespace UserTracker.net
 {
@@ -335,7 +333,6 @@ namespace UserTracker.net
                         }
 
                         if (this.shouldDrawSkeleton && this.skeletonCapbility.IsTracking(user))
-//                        if (this.skeletonCapbility.IsTracking(user))
                             DrawSkeleton(g, anticolors[user % ncolors], user);
 
                     }
@@ -346,7 +343,7 @@ namespace UserTracker.net
 			}
 		}
 
-		private readonly string SAMPLE_XML_FILE = @"../../../Data/SamplesConfig.xml";
+		private readonly string SAMPLE_XML_FILE = @"SamplesConfig.xml";
 
 		private Context context;
 		private DepthGenerator depth;
