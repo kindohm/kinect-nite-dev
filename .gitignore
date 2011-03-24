@@ -1,8 +1,11 @@
 Obj
-Bin
 obj
-bin
 _ReSharper.*
+*.exe
+*.exe.config
+*.exe.manifest
+*.pdb
+bin/Debug/*.dll
 *.csproj.user
 *.resharper.user
 *.resharper

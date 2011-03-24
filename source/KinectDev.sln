@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleHands", "MultipleHa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursorControl", "CursorControl\CursorControl.csproj", "{DAAEE74E-59B7-4CE4-84C9-B5C8496BD2B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursorClicking", "CursorClicking\CursorClicking.csproj", "{D7A6C2DA-8581-4608-BBC6-64D4008C52DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursorClicking2", "CursorClicking2\CursorClicking2.csproj", "{E93B6F61-B964-4804-B212-DDC5CC09055A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,10 @@ Global
 		{DAAEE74E-59B7-4CE4-84C9-B5C8496BD2B1}.Debug|x86.Build.0 = Debug|x86
 		{DAAEE74E-59B7-4CE4-84C9-B5C8496BD2B1}.Release|x86.ActiveCfg = Release|x86
 		{DAAEE74E-59B7-4CE4-84C9-B5C8496BD2B1}.Release|x86.Build.0 = Release|x86
-		{D7A6C2DA-8581-4608-BBC6-64D4008C52DF}.Debug|x86.ActiveCfg = Debug|x86
-		{D7A6C2DA-8581-4608-BBC6-64D4008C52DF}.Debug|x86.Build.0 = Debug|x86
-		{D7A6C2DA-8581-4608-BBC6-64D4008C52DF}.Release|x86.ActiveCfg = Release|x86
-		{D7A6C2DA-8581-4608-BBC6-64D4008C52DF}.Release|x86.Build.0 = Release|x86
+		{E93B6F61-B964-4804-B212-DDC5CC09055A}.Debug|x86.ActiveCfg = Debug|x86
+		{E93B6F61-B964-4804-B212-DDC5CC09055A}.Debug|x86.Build.0 = Debug|x86
+		{E93B6F61-B964-4804-B212-DDC5CC09055A}.Release|x86.ActiveCfg = Release|x86
+		{E93B6F61-B964-4804-B212-DDC5CC09055A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
