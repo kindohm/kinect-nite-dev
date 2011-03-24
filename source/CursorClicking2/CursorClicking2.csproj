@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,7 +61,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AwesomeCommand.cs" />
+    <Compile Include="ButtonHoverBehavior.cs" />
+    <Compile Include="HoverProgressControl.xaml.cs">
+      <DependentUpon>HoverProgressControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel.cs" />
+    <Page Include="HoverProgressControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
