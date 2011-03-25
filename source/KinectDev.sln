@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracker.net_2010", "Use
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swiping", "Swiping\Swiping.csproj", "{8392B5E3-F861-442E-B87C-F2C558F91046}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScarySkeletons", "ScarySkeletons\ScarySkeletons.csproj", "{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -55,6 +57,10 @@ Global
 		{8392B5E3-F861-442E-B87C-F2C558F91046}.Debug|x86.Build.0 = Debug|x86
 		{8392B5E3-F861-442E-B87C-F2C558F91046}.Release|x86.ActiveCfg = Release|x86
 		{8392B5E3-F861-442E-B87C-F2C558F91046}.Release|x86.Build.0 = Release|x86
+		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Debug|x86.ActiveCfg = Debug|x86
+		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Debug|x86.Build.0 = Debug|x86
+		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Release|x86.ActiveCfg = Release|x86
+		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
