@@ -1,18 +1,49 @@
-﻿using System.Collections.ObjectModel;
-
+﻿
 namespace ScarySkeletons
 {
     public class ViewModel : ViewModelBase
     {
-        ObservableCollection<User> users;
-        const string UsersName = "Users";
-        public ObservableCollection<User> Users
+        public ViewModel()
         {
-            get { return this.users; }
+            this.User = new User();
+        }
+
+        string status;
+        const string StatusName = "Status";
+        public string Status
+        {
+            get { return this.status; }
             set
             {
-                this.users = value;
-                this.OnPropertyChanged(UsersName);
+                this.status = value;
+                this.OnPropertyChanged(StatusName);
+            }
+        }
+
+        User user;
+        const string UserName = "User";
+        public User User
+        {
+            get { return this.user; }
+            set
+            {
+                this.user = value;
+                this.OnPropertyChanged(UserName);
+            }
+        }
+
+        bool tracking;
+        const string TrackingName = "Tracking";
+        public bool Tracking
+        {
+            get
+            {
+                return this.tracking;
+            }
+            set
+            {
+                this.tracking = value;
+                this.OnPropertyChanged(TrackingName);
             }
         }
 

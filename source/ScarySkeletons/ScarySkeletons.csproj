@@ -58,7 +58,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BindablePoint.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Joint.cs" />
+    <Compile Include="Particle.cs" />
+    <Compile Include="ParticleThrower.cs" />
+    <Compile Include="Point3DToStringConverter.cs" />
     <Compile Include="User.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="ViewModelBase.cs" />
@@ -101,6 +106,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="head.png" />
     <Content Include="SamplesConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
