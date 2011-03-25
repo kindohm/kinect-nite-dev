@@ -1,16 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 
 namespace ScarySkeletons
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        static ViewModel viewModel;
+
+        public static ViewModel ViewModel
+        {
+            get
+            {
+                if (viewModel == null)
+                {
+                    viewModel = new ViewModel();
+                }
+                return viewModel;
+            }
+        }
+
+
     }
 }
