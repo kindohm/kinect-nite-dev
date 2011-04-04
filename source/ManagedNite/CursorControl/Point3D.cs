@@ -1,5 +1,5 @@
 ﻿
-namespace KinectCursorSmoothing
+namespace CursorControl
 {
     public class Point3D
     {
