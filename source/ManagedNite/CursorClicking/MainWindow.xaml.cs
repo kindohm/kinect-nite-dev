@@ -3,10 +3,9 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
-using xn;
-using xnv;
+using ManagedNite;
 
-namespace CursorClicking
+namespace CursorClicking2
 {
     public partial class MainWindow : Window
     {
@@ -17,8 +16,8 @@ namespace CursorClicking
 
         bool shutdown;
         Point3D point;
-        Context context;
-        SessionManager session;
+        XnMOpenNIContext context;
+        XnMSessionManager session;
         DispatcherTimer timer;
 
         [DllImportAttribute("user32.dll", EntryPoint = "SetCursorPos")]
@@ -68,17 +67,20 @@ namespace CursorClicking
 
         void SetUpKinect()
         {
-            this.context = new Context("openni.xml");
-            this.session = new SessionManager(context, "Wave");
-            this.session.SessionStart += new SessionManager.SessionStartHandler(session_SessionStart);
-            this.session.SessionEnd += new SessionManager.SessionEndHandler(session_SessionEnd);
+            this.context = new XnMOpenNIContext();
+            this.context.Init();
 
-            var point = new PointControl();
-            point.PointUpdate += new PointControl.PointUpdateHandler(point_PointUpdate);
+            this.session = new XnMSessionManager(context, "Wave", "RaiseHand");
+
+            this.session.SessionStarted += new EventHandler<PointEventArgs>(session_SessionStarted);
+            this.session.SessionEnded += new EventHandler(session_SessionEnded);
+
+            var point = new XnMPointFilter();
+            point.PointUpdate += new EventHandler<PointBasedEventArgs>(point_PointUpdate);
             this.session.AddListener(point);
 
-            var push = new PushDetector();
-            push.Push += new PushDetector.PushHandler(push_Push);
+            var push = new XnMPushDetector();
+            push.Push += new EventHandler<PushDetectorEventArgs>(push_Push);
             this.session.AddListener(push);
 
             var start = new ThreadStart(RunKinect);
@@ -86,9 +88,33 @@ namespace CursorClicking
             thread.Start();
         }
 
-        void push_Push(float velocity, float angle)
+        void push_Push(object sender, PushDetectorEventArgs e)
         {
             DoClick();
+        }
+
+        void point_PointUpdate(object sender, PointBasedEventArgs e)
+        {
+            Point = new Point3D()
+            {
+                X = e.Position.X,
+                Y = e.Position.Y,
+                Z = e.Position.Z
+            };
+        }
+
+        void session_SessionEnded(object sender, EventArgs e)
+        {
+            this.timer.Stop();
+        }
+
+        void session_SessionStarted(object sender, PointEventArgs e)
+        {
+            this.timer.Start();
+        }
+
+        void push_Push(float velocity, float angle)
+        {
         }
 
         void DoClick()
@@ -97,34 +123,12 @@ namespace CursorClicking
             mouse_event((int)MouseEventType.LeftUp, (int)Point.X, (int)Point.Y, 0, 0);
         }
 
-        void session_SessionEnd()
-        {
-            this.timer.Stop();
-        }
-
-        void session_SessionStart(ref Point3D position)
-        {
-            this.timer.Start();
-        }
-
-        void point_PointUpdate(ref HandPointContext context)
-        {
-            this.Point = context.ptPosition;
-        }
-
         void RunKinect()
         {
             while (!this.Shutdown)
             {
-                this.context.WaitAndUpdateAll();
-                try
-                {
-                    this.session.Update(this.context);
-                }
-                catch (AccessViolationException)
-                {
-                    //who cares!
-                }
+                this.context.Update();
+                this.session.Update(this.context);
             }
         }
     }

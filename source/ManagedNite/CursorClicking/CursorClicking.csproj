@@ -38,7 +38,7 @@
   <ItemGroup>
     <Reference Include="ManagedNite, Version=1.1.3928.31375, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\Prime Sense\NITE\Wrappers\C#\Bin\ManagedNite.dll</HintPath>
+      <HintPath>..\..\dependencies\ManagedNite.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
