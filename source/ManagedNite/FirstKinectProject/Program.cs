@@ -10,6 +10,7 @@ namespace FirstKinectProject
             Console.WriteLine("Connecting to device...");
 
             var context = new XnMOpenNIContext();
+            context.Init();
             var session = new XnMSessionManager(context, "Wave", "RaiseHand");
 
             session.SessionStarted += new EventHandler<PointEventArgs>(session_SessionStarted);

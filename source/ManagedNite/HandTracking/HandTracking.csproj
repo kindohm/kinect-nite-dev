@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{335FEDE7-5A7A-4530-B502-DB586EB3F8C8}</ProjectGuid>
+    <ProjectGuid>{71B5C806-9003-4DFC-AEA8-D33917304D09}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FirstKinectProject</RootNamespace>
-    <AssemblyName>FirstKinectProject</AssemblyName>
+    <RootNamespace>HandTracking</RootNamespace>
+    <AssemblyName>HandTracking</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -50,11 +50,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="ManagedNite.dll.config" />
+    <Content Include="bin\Debug\data\openni.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\data\openni.xml" />
+    <None Include="app.config" />
+    <None Include="ManagedNite.dll.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
