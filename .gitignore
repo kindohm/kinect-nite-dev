@@ -9,6 +9,7 @@ Bin
 *.suo
 *.cache
 *.xap
+*.pez
 !$KinectDev.pptx
 ~$KinectDev.pptx
 
