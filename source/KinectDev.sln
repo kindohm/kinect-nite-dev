@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracker.net_2010", "UserTracker.net\UserTracker.net_2010.csproj", "{29CC3A9A-5CB1-4D53-B221-45181C4B281C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScarySkeletons", "ScarySkeletons\ScarySkeletons.csproj", "{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ManagedNite", "ManagedNite", "{A0242155-4C18-4EA0-8EE6-30357CA8B5C5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XnVNite", "XnVNite", "{BFD22E61-912E-4A70-9A2D-C440C750B040}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenNI.net", "OpenNI.net", "{BFD22E61-912E-4A70-9A2D-C440C750B040}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstKinectProject", "ManagedNite\FirstKinectProject\FirstKinectProject.csproj", "{335FEDE7-5A7A-4530-B502-DB586EB3F8C8}"
 EndProject
@@ -23,20 +19,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swiping", "ManagedNite\Swip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleHands", "ManagedNite\MultipleHands\MultipleHands.csproj", "{BFED71FC-255D-49FA-B52F-4ACA051F53E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracker.net_2010", "OpenNI.net\UserTracker.net\UserTracker.net_2010.csproj", "{29CC3A9A-5CB1-4D53-B221-45181C4B281C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScarySkeletons", "OpenNI.net\ScarySkeletons\ScarySkeletons.csproj", "{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29CC3A9A-5CB1-4D53-B221-45181C4B281C}.Debug|x86.ActiveCfg = Debug|x86
-		{29CC3A9A-5CB1-4D53-B221-45181C4B281C}.Debug|x86.Build.0 = Debug|x86
-		{29CC3A9A-5CB1-4D53-B221-45181C4B281C}.Release|x86.ActiveCfg = Release|x86
-		{29CC3A9A-5CB1-4D53-B221-45181C4B281C}.Release|x86.Build.0 = Release|x86
-		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Debug|x86.ActiveCfg = Debug|x86
-		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Debug|x86.Build.0 = Debug|x86
-		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Release|x86.ActiveCfg = Release|x86
-		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Release|x86.Build.0 = Release|x86
 		{335FEDE7-5A7A-4530-B502-DB586EB3F8C8}.Debug|x86.ActiveCfg = Debug|x86
 		{335FEDE7-5A7A-4530-B502-DB586EB3F8C8}.Debug|x86.Build.0 = Debug|x86
 		{335FEDE7-5A7A-4530-B502-DB586EB3F8C8}.Release|x86.ActiveCfg = Release|x86
@@ -65,6 +57,14 @@ Global
 		{BFED71FC-255D-49FA-B52F-4ACA051F53E7}.Debug|x86.Build.0 = Debug|x86
 		{BFED71FC-255D-49FA-B52F-4ACA051F53E7}.Release|x86.ActiveCfg = Release|x86
 		{BFED71FC-255D-49FA-B52F-4ACA051F53E7}.Release|x86.Build.0 = Release|x86
+		{29CC3A9A-5CB1-4D53-B221-45181C4B281C}.Debug|x86.ActiveCfg = Debug|x86
+		{29CC3A9A-5CB1-4D53-B221-45181C4B281C}.Debug|x86.Build.0 = Debug|x86
+		{29CC3A9A-5CB1-4D53-B221-45181C4B281C}.Release|x86.ActiveCfg = Release|x86
+		{29CC3A9A-5CB1-4D53-B221-45181C4B281C}.Release|x86.Build.0 = Release|x86
+		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Debug|x86.ActiveCfg = Debug|x86
+		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Debug|x86.Build.0 = Debug|x86
+		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Release|x86.ActiveCfg = Release|x86
+		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,5 +77,7 @@ Global
 		{63A50762-27FA-46C1-A423-304D32A94518} = {A0242155-4C18-4EA0-8EE6-30357CA8B5C5}
 		{8392B5E3-F861-442E-B87C-F2C558F91046} = {A0242155-4C18-4EA0-8EE6-30357CA8B5C5}
 		{BFED71FC-255D-49FA-B52F-4ACA051F53E7} = {A0242155-4C18-4EA0-8EE6-30357CA8B5C5}
+		{29CC3A9A-5CB1-4D53-B221-45181C4B281C} = {BFD22E61-912E-4A70-9A2D-C440C750B040}
+		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5} = {BFD22E61-912E-4A70-9A2D-C440C750B040}
 	EndGlobalSection
 EndGlobal
