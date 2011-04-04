@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UserTracker.net
+namespace SkeletonGestures
 {
     public enum SwipeDirection
     {

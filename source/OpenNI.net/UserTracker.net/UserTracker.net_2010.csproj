@@ -86,9 +86,6 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Swipe.cs" />
-    <Compile Include="SwipeDirection.cs" />
-    <Compile Include="SwipeEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

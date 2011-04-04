@@ -9,18 +9,18 @@ using xn;
 
 namespace UserTracker.net
 {
-	public partial class MainWindow : Form
-	{
-		public MainWindow()
-		{
-			InitializeComponent();
+    public partial class MainWindow : Form
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
 
-			this.context = new Context(SAMPLE_XML_FILE);
-			this.depth = context.FindExistingNode(NodeType.Depth) as DepthGenerator;
-			if (this.depth == null)
-			{
-				throw new Exception("Viewer must have a depth node!");
-			}
+            this.context = new Context(SAMPLE_XML_FILE);
+            this.depth = context.FindExistingNode(NodeType.Depth) as DepthGenerator;
+            if (this.depth == null)
+            {
+                throw new Exception("Viewer must have a depth node!");
+            }
 
             this.userGenerator = new UserGenerator(this.context);
             this.skeletonCapbility = new SkeletonCapability(this.userGenerator);
@@ -33,27 +33,21 @@ namespace UserTracker.net
             this.skeletonCapbility.CalibrationEnd += new SkeletonCapability.CalibrationEndHandler(skeletonCapbility_CalibrationEnd);
 
             this.skeletonCapbility.SetSkeletonProfile(SkeletonProfile.All);
-            this.joints = new Dictionary<uint,Dictionary<SkeletonJoint,SkeletonJointPosition>>();
+            this.joints = new Dictionary<uint, Dictionary<SkeletonJoint, SkeletonJointPosition>>();
             this.userGenerator.StartGenerating();
 
 
-			this.histogram = new int[this.depth.GetDeviceMaxDepth()];
+            this.histogram = new int[this.depth.GetDeviceMaxDepth()];
 
-			MapOutputMode mapMode = this.depth.GetMapOutputMode();
-            
-            Swipe.Initialize();
-            //Swipe.SwipeCaptured += new EventHandler<SwipeEventArgs>(Swipe_SwipeCaptured);
+            MapOutputMode mapMode = this.depth.GetMapOutputMode();
 
-			this.bitmap = new Bitmap((int)mapMode.nXRes, (int)mapMode.nYRes/*, System.Drawing.Imaging.PixelFormat.Format24bppRgb*/);
-			this.shouldRun = true;
-			this.readerThread = new Thread(ReaderThread);
-			this.readerThread.Start();
-		}
-
-        void Swipe_SwipeCaptured(object sender, SwipeEventArgs e)
-        {
-            this.label1.Text = "SWIPE!! " + DateTime.Now.ToString();
+            this.bitmap = new Bitmap((int)mapMode.nXRes, (int)mapMode.nYRes/*, System.Drawing.Imaging.PixelFormat.Format24bppRgb*/);
+            this.shouldRun = true;
+            this.readerThread = new Thread(ReaderThread);
+            this.readerThread.Start();
         }
+
+
 
         void skeletonCapbility_CalibrationEnd(ProductionNode node, uint id, bool success)
         {
@@ -84,104 +78,97 @@ namespace UserTracker.net
             this.joints.Remove(id);
         }
 
-		protected override void OnPaint(PaintEventArgs e)
-		{
-			base.OnPaint(e);
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
 
-			lock (this)
-			{
-				e.Graphics.DrawImage(this.bitmap,
-					this.panelView.Location.X,
-					this.panelView.Location.Y,
-					this.panelView.Size.Width,
-					this.panelView.Size.Height);
-
-                if (Swipe.Swiped)
-                {
-                    Swipe.Swiped = false;
-                    this.label1.Text = "Swipe " + Swipe.Direction.ToString() + " " + DateTime.Now.ToString();
-                }
-
+            lock (this)
+            {
+                e.Graphics.DrawImage(this.bitmap,
+                    this.panelView.Location.X,
+                    this.panelView.Location.Y,
+                    this.panelView.Size.Width,
+                    this.panelView.Size.Height);
             }
-		}
+        }
 
-		protected override void OnPaintBackground(PaintEventArgs pevent)
-		{
-			//Don't allow the background to paint
-		}
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+            //Don't allow the background to paint
+        }
 
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			this.shouldRun = false;
-			this.readerThread.Join();
-			base.OnClosing(e);
-		}
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            this.shouldRun = false;
+            this.readerThread.Join();
+            base.OnClosing(e);
+        }
 
-		protected override void OnKeyPress(KeyPressEventArgs e)
-		{
-			if (e.KeyChar == 27)
-			{
-				Close();
-			}
+        protected override void OnKeyPress(KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 27)
+            {
+                Close();
+            }
             switch (e.KeyChar)
             {
-            case (char)27:
-            	break;
-            case 'b':
-                this.shouldDrawBackground = !this.shouldDrawBackground;
-                break;
-            case 'x':
-                this.shouldDrawPixels = !this.shouldDrawPixels;
-                break;
-            case 's':
-                this.shouldDrawSkeleton = !this.shouldDrawSkeleton;
-                break;
-            case 'i':
-                this.shouldPrintID = !this.shouldPrintID;
-                break;
-            case 'l':
-                this.shouldPrintState = !this.shouldPrintState;
-                break;
+                case (char)27:
+                    break;
+                case 'b':
+                    this.shouldDrawBackground = !this.shouldDrawBackground;
+                    break;
+                case 'x':
+                    this.shouldDrawPixels = !this.shouldDrawPixels;
+                    break;
+                case 's':
+                    this.shouldDrawSkeleton = !this.shouldDrawSkeleton;
+                    break;
+                case 'i':
+                    this.shouldPrintID = !this.shouldPrintID;
+                    break;
+                case 'l':
+                    this.shouldPrintState = !this.shouldPrintState;
+                    break;
 
             }
-			base.OnKeyPress(e);
-		}
+            base.OnKeyPress(e);
+        }
 
-		private unsafe void CalcHist(DepthMetaData depthMD)
-		{
-			// reset
-			for (int i = 0; i < this.histogram.Length; ++i)
-				this.histogram[i] = 0;
+        private unsafe void CalcHist(DepthMetaData depthMD)
+        {
+            // reset
+            for (int i = 0; i < this.histogram.Length; ++i)
+                this.histogram[i] = 0;
 
-			ushort* pDepth = (ushort*)depthMD.DepthMapPtr.ToPointer();
+            ushort* pDepth = (ushort*)depthMD.DepthMapPtr.ToPointer();
 
-			int points = 0;
-			for (int y = 0; y < depthMD.YRes; ++y)
-			{
-				for (int x = 0; x < depthMD.XRes; ++x, ++pDepth)
-				{
-					ushort depthVal = *pDepth;
-					if (depthVal != 0)
-					{
-						this.histogram[depthVal]++;
-						points++;
-					}
-				}
-			}
+            int points = 0;
+            for (int y = 0; y < depthMD.YRes; ++y)
+            {
+                for (int x = 0; x < depthMD.XRes; ++x, ++pDepth)
+                {
+                    ushort depthVal = *pDepth;
+                    if (depthVal != 0)
+                    {
+                        this.histogram[depthVal]++;
+                        points++;
+                    }
+                }
+            }
 
-			for (int i = 1; i < this.histogram.Length; i++)
-			{
-				this.histogram[i] += this.histogram[i-1];
-			}
+            for (int i = 1; i < this.histogram.Length; i++)
+            {
+                this.histogram[i] += this.histogram[i - 1];
+            }
 
-			if (points > 0)
-			{
-				for (int i = 1; i < this.histogram.Length; i++)
-				{
-					this.histogram[i] = (int)(256 * (1.0f - (this.histogram[i] / (float)points)));
-				}
-			}
-		}
+            if (points > 0)
+            {
+                for (int i = 1; i < this.histogram.Length; i++)
+                {
+                    this.histogram[i] = (int)(256 * (1.0f - (this.histogram[i] / (float)points)));
+                }
+            }
+        }
 
         private Color[] colors = { Color.Red, Color.Blue, Color.ForestGreen, Color.Yellow, Color.Orange, Color.Purple, Color.White };
         private Color[] anticolors = { Color.Green, Color.Orange, Color.Red, Color.Purple, Color.Blue, Color.Yellow, Color.Black };
@@ -191,15 +178,15 @@ namespace UserTracker.net
         {
             SkeletonJointPosition pos = new SkeletonJointPosition();
             this.skeletonCapbility.GetSkeletonJointPosition(user, joint, ref pos);
-			if (pos.position.Z == 0)
-			{
-				pos.fConfidence = 0;
-			}
-			else
-			{
-				pos.position = this.depth.ConvertRealWorldToProjective(pos.position);
-			}
-			this.joints[user][joint] = pos;
+            if (pos.position.Z == 0)
+            {
+                pos.fConfidence = 0;
+            }
+            else
+            {
+                pos.position = this.depth.ConvertRealWorldToProjective(pos.position);
+            }
+            this.joints[user][joint] = pos;
         }
 
         private void GetJoints(uint user)
@@ -228,14 +215,14 @@ namespace UserTracker.net
 
         private void DrawLine(Graphics g, Color color, Dictionary<SkeletonJoint, SkeletonJointPosition> dict, SkeletonJoint j1, SkeletonJoint j2)
         {
-			Point3D pos1 = dict[j1].position;
-			Point3D pos2 = dict[j2].position;
+            Point3D pos1 = dict[j1].position;
+            Point3D pos2 = dict[j2].position;
 
-			if (dict[j1].fConfidence == 0 || dict[j2].fConfidence == 0)
-				return;
+            if (dict[j1].fConfidence == 0 || dict[j2].fConfidence == 0)
+                return;
 
             g.DrawLine(new Pen(color),
-						new Point((int)pos1.X, (int)pos1.Y),
+                        new Point((int)pos1.X, (int)pos1.Y),
                         new Point((int)pos2.X, (int)pos2.Y));
 
         }
@@ -268,28 +255,28 @@ namespace UserTracker.net
             DrawLine(g, color, dict, SkeletonJoint.RightKnee, SkeletonJoint.RightFoot);
         }
 
-		private unsafe void ReaderThread()
-		{
-			DepthMetaData depthMD = new DepthMetaData();
+        private unsafe void ReaderThread()
+        {
+            DepthMetaData depthMD = new DepthMetaData();
 
-			while (this.shouldRun)
-			{
-				try
-				{
-					this.context.WaitOneUpdateAll(this.depth);
-				}
-				catch (Exception)
-				{
-				}
+            while (this.shouldRun)
+            {
+                try
+                {
+                    this.context.WaitOneUpdateAll(this.depth);
+                }
+                catch (Exception)
+                {
+                }
 
-				this.depth.GetMetaData(depthMD);
+                this.depth.GetMetaData(depthMD);
 
-				CalcHist(depthMD);
+                CalcHist(depthMD);
 
-				lock (this)
-				{
-					Rectangle rect = new Rectangle(0, 0, this.bitmap.Width, this.bitmap.Height);
-					BitmapData data = this.bitmap.LockBits(rect, ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                lock (this)
+                {
+                    Rectangle rect = new Rectangle(0, 0, this.bitmap.Width, this.bitmap.Height);
+                    BitmapData data = this.bitmap.LockBits(rect, ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
                     if (this.shouldDrawPixels)
                     {
@@ -351,29 +338,28 @@ namespace UserTracker.net
                             DrawSkeleton(g, anticolors[user % ncolors], user);
                             var userJoints = this.joints[user];
                             var currentPoint = userJoints[SkeletonJoint.RightHand].position;
-                            Swipe.AddSwipePoint(currentPoint);
                         }
 
                     }
                     g.Dispose();
-				}
+                }
 
-				this.Invalidate();
-			}
-		}
+                this.Invalidate();
+            }
+        }
 
-		private readonly string SAMPLE_XML_FILE = @"SamplesConfig.xml";
+        private readonly string SAMPLE_XML_FILE = @"SamplesConfig.xml";
 
-		private Context context;
-		private DepthGenerator depth;
+        private Context context;
+        private DepthGenerator depth;
         private UserGenerator userGenerator;
         private SkeletonCapability skeletonCapbility;
         private PoseDetectionCapability poseDetectionCapability;
         private string calibPose;
-		private Thread readerThread;
-		private bool shouldRun;
-		private Bitmap bitmap;
-		private int[] histogram;
+        private Thread readerThread;
+        private bool shouldRun;
+        private Bitmap bitmap;
+        private int[] histogram;
 
         private Dictionary<uint, Dictionary<SkeletonJoint, SkeletonJointPosition>> joints;
 
@@ -382,5 +368,5 @@ namespace UserTracker.net
         private bool shouldPrintID = true;
         private bool shouldPrintState = true;
         private bool shouldDrawSkeleton = true;
-	}
+    }
 }

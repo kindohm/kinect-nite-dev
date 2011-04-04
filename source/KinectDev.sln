@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTracker.net_2010", "Ope
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScarySkeletons", "OpenNI.net\ScarySkeletons\ScarySkeletons.csproj", "{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkeletonGestures", "OpenNI.net\SkeletonGestures\SkeletonGestures.csproj", "{43F67CEE-8634-418F-B579-B5483E87FDC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -65,6 +67,10 @@ Global
 		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Debug|x86.Build.0 = Debug|x86
 		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Release|x86.ActiveCfg = Release|x86
 		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5}.Release|x86.Build.0 = Release|x86
+		{43F67CEE-8634-418F-B579-B5483E87FDC1}.Debug|x86.ActiveCfg = Debug|x86
+		{43F67CEE-8634-418F-B579-B5483E87FDC1}.Debug|x86.Build.0 = Debug|x86
+		{43F67CEE-8634-418F-B579-B5483E87FDC1}.Release|x86.ActiveCfg = Release|x86
+		{43F67CEE-8634-418F-B579-B5483E87FDC1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +85,6 @@ Global
 		{BFED71FC-255D-49FA-B52F-4ACA051F53E7} = {A0242155-4C18-4EA0-8EE6-30357CA8B5C5}
 		{29CC3A9A-5CB1-4D53-B221-45181C4B281C} = {BFD22E61-912E-4A70-9A2D-C440C750B040}
 		{55935EC0-994A-4DDF-B3CA-B4C9A9EBD6A5} = {BFD22E61-912E-4A70-9A2D-C440C750B040}
+		{43F67CEE-8634-418F-B579-B5483E87FDC1} = {BFD22E61-912E-4A70-9A2D-C440C750B040}
 	EndGlobalSection
 EndGlobal

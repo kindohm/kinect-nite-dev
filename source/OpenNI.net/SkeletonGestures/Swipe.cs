@@ -2,38 +2,35 @@
 using System.Diagnostics;
 using xn;
 
-namespace UserTracker.net
+namespace SkeletonGestures
 {
     public class Swipe
     {
-        static Point3D[] points;
-        static bool initialized;
-        static int last;
+        Point3D[] points;
+        bool initialized;
+        int last;
 
-        public static int LineSize { get; set; }
-        public static int MaxYDelta { get; set; }
-        public static int MinXDelta { get; set; }
+        public int LineSize { get; set; }
+        public int MaxYDelta { get; set; }
+        public int MinXDelta { get; set; }
 
-        public static SwipeDirection Direction { get; set; }
-        public static bool Swiped { get; set; }
-
-        public static void Initialize()
+        public void Initialize()
         {
             if (!initialized)
             {
-                LineSize = 10;
+                LineSize = 300;
                 MaxYDelta = 100;
                 MinXDelta = 300;
                 last = LineSize - 1;
 
-                points = new Point3D[Swipe.LineSize];
-                for (int i = 0; i < Swipe.LineSize; i++)
+                points = new Point3D[this.LineSize];
+                for (int i = 0; i < this.LineSize; i++)
                     points[i] = new Point3D();
                 initialized = true;
             }
         }
 
-        static bool AnalyzePoints(Point3D[] points)
+        bool AnalyzePoints(Point3D[] points)
         {
             if (points[0].X == 0 || points[last].X == 0)
                 return false;
@@ -70,15 +67,12 @@ namespace UserTracker.net
             return true;
         }
 
-        public static void AddSwipePoint(Point3D point)
+        public void AddSwipePoint(Point3D point)
         {
             if (!initialized)
                 Initialize();
 
-            if (Swiped)
-                return;
-
-            int max = Swipe.LineSize - 1;
+            int max = this.LineSize - 1;
             for (int i = max; i > 0; i--)
             {
                 points[i] = points[i - 1];
@@ -87,22 +81,19 @@ namespace UserTracker.net
             points[0] = point;
             if (points[0].X != 0)
             {
-                bool result = Swipe.AnalyzePoints(points);
+                bool result = this.AnalyzePoints(points);
 
                 if (result)
                 {
-                    Swiped = true;
-                    var direction = points[0].X > points[last].X ? SwipeDirection.Right : SwipeDirection.Left;
-                    Direction = direction;
 
-                    //if (SwipeCaptured != null)
-                    //{
-                    //    Debug.WriteLine(direction.ToString());
-                    //    SwipeCaptured(null,
-                    //        new SwipeEventArgs(direction));
-                    //}
+                    if (SwipeCaptured != null)
+                    {
+                        var direction = points[0].X > points[last].X ? SwipeDirection.Right : SwipeDirection.Left;
+                        SwipeCaptured(null,
+                            new SwipeEventArgs(direction));
+                    }
 
-                    for (int i = 0; i < Swipe.LineSize; i++)
+                    for (int i = 0; i < this.LineSize; i++)
                     {
                         points[i] = new Point3D();
                     }
@@ -111,6 +102,6 @@ namespace UserTracker.net
             }
         }
 
-        //public static event EventHandler<SwipeEventArgs> SwipeCaptured;
+        public event EventHandler<SwipeEventArgs> SwipeCaptured;
     }
 }

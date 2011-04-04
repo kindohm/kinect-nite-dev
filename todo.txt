@@ -1,0 +1,11 @@
+openni.net demos on
+
+- cursor control (maybe)
+- custom linear gestures
+
+more research on
+
+-depth data
+-skeleton classes
+
+
