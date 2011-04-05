@@ -21,6 +21,7 @@ namespace SkeletonGestures
 
         Swipe leftSwipe;
         Swipe rightSwipe;
+        Push push;
 
         public Kinect()
         {
@@ -79,9 +80,18 @@ namespace SkeletonGestures
             this.rightSwipe.Initialize();
             this.rightSwipe.SwipeCaptured += new EventHandler<SwipeEventArgs>(rightSwipe_SwipeCaptured);
 
+            this.push = new Push();
+            this.push.Initialize();
+            this.push.PushCaptured += new EventHandler<EventArgs>(push_PushCaptured);
+
             this.ShouldRun = true;
             this.readerThread = new Thread(ReaderThread);
             this.readerThread.Start();
+        }
+
+        void push_PushCaptured(object sender, EventArgs e)
+        {
+            this.OnPushDetected();
         }
 
         void rightSwipe_SwipeCaptured(object sender, SwipeEventArgs e)
@@ -96,11 +106,12 @@ namespace SkeletonGestures
 
         void OnSwipeDetected(SwipeDirection direction, Hand hand)
         {
-            App.ViewModel.SwipeInfo = "Swiped " + hand.ToString() + " " + direction.ToString();
+            App.ViewModel.SwipeInfo = "Swiped " + hand.ToString() + " hand, to the " + direction.ToString();
+        }
 
-            if (this.SwipeDetected != null)
-                this.SwipeDetected(this,
-                    new SwipeEventArgs(direction, hand));
+        void OnPushDetected()
+        {
+            App.ViewModel.SwipeInfo = "Pushed!!!";
         }
 
         void userGenerator_NewUser(ProductionNode node, uint id)
@@ -154,16 +165,17 @@ namespace SkeletonGestures
                     if (this.skeletonCapbility.IsTracking(firstUser))
                     {
                         var rightHand = this.GetJointPosition(firstUser, SkeletonJoint.RightHand);
-                        this.rightSwipe.AddSwipePoint(
-                            new TimePoint()
+                        var rightPoint =                             
+                        new TimePoint()
                         {
                             X = rightHand.position.X,
                             Y = rightHand.position.Y,
                             Z = rightHand.position.Z,
                             Time = DateTime.Now
-                        });
+                        };
 
-                        //Debug.WriteLine(rightHand.position.X);
+                        this.rightSwipe.AddSwipePoint(rightPoint);
+                        this.push.AddPushPoint(rightPoint);
 
                         var leftHand = this.GetJointPosition(firstUser, SkeletonJoint.LeftHand);
 
@@ -195,7 +207,6 @@ namespace SkeletonGestures
             return pos;
         }
 
-        public event EventHandler<SwipeEventArgs> SwipeDetected;
     }
 }
 

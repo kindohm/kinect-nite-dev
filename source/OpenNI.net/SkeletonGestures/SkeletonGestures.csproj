@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Hand.cs" />
+    <Compile Include="Push.cs" />
     <Compile Include="Swipe.cs" />
     <Compile Include="SwipeDirection.cs" />
     <Compile Include="SwipeEventArgs.cs" />
