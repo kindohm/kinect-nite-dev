@@ -20,6 +20,18 @@ namespace SkeletonGestures
             }
         }
 
+        string swipeInfo;
+        const string SwipeInfoName = "SwipeInfo";
+        public string SwipeInfo
+        {
+            get { return this.swipeInfo; }
+            set
+            {
+                this.swipeInfo = value;
+                this.OnPropertyChanged(SwipeInfoName);
+            }
+        }
+
         bool tracking;
         const string TrackingName = "Tracking";
         public bool Tracking

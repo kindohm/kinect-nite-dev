@@ -6,33 +6,35 @@ namespace SkeletonGestures
 {
     public class Swipe
     {
-        Point3D[] points;
+        TimePoint[] points;
         bool initialized;
         int last;
 
         public int LineSize { get; set; }
         public int MaxYDelta { get; set; }
         public int MinXDelta { get; set; }
+        public TimeSpan MaxTimeSpan { get; set; }
 
         public void Initialize()
         {
             if (!initialized)
             {
-                LineSize = 300;
+                LineSize = 10;
                 MaxYDelta = 100;
-                MinXDelta = 300;
+                MinXDelta = 100;
                 last = LineSize - 1;
+                MaxTimeSpan = TimeSpan.FromMilliseconds(300);
 
-                points = new Point3D[this.LineSize];
+                points = new TimePoint[this.LineSize];
                 for (int i = 0; i < this.LineSize; i++)
-                    points[i] = new Point3D();
+                    points[i] = new TimePoint();
                 initialized = true;
             }
         }
 
-        bool AnalyzePoints(Point3D[] points)
+        bool AnalyzePoints(TimePoint[] points)
         {
-            if (points[0].X == 0 || points[last].X == 0)
+            if (points[0].Time == DateTime.MinValue || points[last].Time == DateTime.MinValue)
                 return false;
 
             float x1 = points[0].X;
@@ -46,11 +48,11 @@ namespace SkeletonGestures
             if (y1 - y2 > MaxYDelta)
                 return false;
 
+            if (points[last].Time - points[0].Time > this.MaxTimeSpan)
+                return false;
+
             for (int i = 1; i < LineSize - 2; i++)
             {
-                if (points[i].X == 0)
-                    return false;
-
                 if (Math.Abs((points[i].Y - y1)) > MaxYDelta)
                     return false;
 
@@ -67,7 +69,7 @@ namespace SkeletonGestures
             return true;
         }
 
-        public void AddSwipePoint(Point3D point)
+        public void AddSwipePoint(TimePoint point)
         {
             if (!initialized)
                 Initialize();
@@ -95,7 +97,7 @@ namespace SkeletonGestures
 
                     for (int i = 0; i < this.LineSize; i++)
                     {
-                        points[i] = new Point3D();
+                        points[i] = new TimePoint();
                     }
                 }
 

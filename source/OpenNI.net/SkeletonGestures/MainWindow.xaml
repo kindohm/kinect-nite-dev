@@ -3,6 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <StackPanel
+                        HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+>
+            <TextBlock 
+            FontSize="20"
+                   Text="{Binding Status}"/>
+            <TextBlock 
+            FontSize="20"
+                   Text="{Binding SwipeInfo}"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using xn;
+using System.Diagnostics;
 
 namespace SkeletonGestures
 {
@@ -48,12 +49,12 @@ namespace SkeletonGestures
         {
             this.context = new Context("SamplesConfig.xml");
 
-            //this.depth = context.FindExistingNode(NodeType.Depth) as DepthGenerator;
+            this.depth = context.FindExistingNode(NodeType.Depth) as DepthGenerator;
 
-            //if (this.depth == null)
-            //{
-            //    throw new Exception("Viewer must have a depth node!");
-            //}
+            if (this.depth == null)
+            {
+                throw new Exception("Viewer must have a depth node!");
+            }
 
             this.userGenerator = new UserGenerator(this.context);
             this.skeletonCapbility = new SkeletonCapability(this.userGenerator);
@@ -95,6 +96,8 @@ namespace SkeletonGestures
 
         void OnSwipeDetected(SwipeDirection direction, Hand hand)
         {
+            App.ViewModel.SwipeInfo = "Swiped " + hand.ToString() + " " + direction.ToString();
+
             if (this.SwipeDetected != null)
                 this.SwipeDetected(this,
                     new SwipeEventArgs(direction, hand));
@@ -102,7 +105,7 @@ namespace SkeletonGestures
 
         void userGenerator_NewUser(ProductionNode node, uint id)
         {
-            App.ViewModel.Status = "Waiting for pose...";
+            App.ViewModel.Status = "User identified. Waiting for pose...";
             this.poseDetectionCapability.StartPoseDetection(this.calibPose, id);
         }
 
@@ -124,7 +127,7 @@ namespace SkeletonGestures
             }
             else
             {
-                App.ViewModel.Status = "Waiting for pose...";
+                App.ViewModel.Status = "Calibration failed...  Waiting for another pose...";
                 this.poseDetectionCapability.StartPoseDetection(calibPose, id);
             }
         }
@@ -151,10 +154,27 @@ namespace SkeletonGestures
                     if (this.skeletonCapbility.IsTracking(firstUser))
                     {
                         var rightHand = this.GetJointPosition(firstUser, SkeletonJoint.RightHand);
-                        this.rightSwipe.AddSwipePoint(rightHand.position);
+                        this.rightSwipe.AddSwipePoint(
+                            new TimePoint()
+                        {
+                            X = rightHand.position.X,
+                            Y = rightHand.position.Y,
+                            Z = rightHand.position.Z,
+                            Time = DateTime.Now
+                        });
+
+                        //Debug.WriteLine(rightHand.position.X);
 
                         var leftHand = this.GetJointPosition(firstUser, SkeletonJoint.LeftHand);
-                        this.leftSwipe.AddSwipePoint(leftHand.position);
+
+                        this.leftSwipe.AddSwipePoint(
+                            new TimePoint()
+                            {
+                                X = leftHand.position.X,
+                                Y = leftHand.position.Y,
+                                Z = leftHand.position.Z,
+                                Time = DateTime.Now
+                            });
                     }
                 }
             }

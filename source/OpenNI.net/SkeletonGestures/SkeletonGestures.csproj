@@ -62,6 +62,7 @@
     <Compile Include="Swipe.cs" />
     <Compile Include="SwipeDirection.cs" />
     <Compile Include="SwipeEventArgs.cs" />
+    <Compile Include="TimePoint.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
