@@ -1,7 +1,6 @@
 openni.net demos on
 
 - cursor control (maybe)
-- custom linear gestures
 
 content for real world
 

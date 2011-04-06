@@ -17,6 +17,8 @@ namespace UserTracker.net
 
             this.context = new Context(SAMPLE_XML_FILE);
             this.depth = context.FindExistingNode(NodeType.Depth) as DepthGenerator;
+
+            
             if (this.depth == null)
             {
                 throw new Exception("Viewer must have a depth node!");
