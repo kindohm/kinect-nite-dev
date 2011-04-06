@@ -10,6 +10,7 @@ Bin
 *.cache
 *.xap
 *.pez
+todo.txt
 !$KinectDev.pptx
 ~$KinectDev.pptx
 
