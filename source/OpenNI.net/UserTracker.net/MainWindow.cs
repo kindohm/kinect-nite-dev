@@ -278,7 +278,8 @@ namespace UserTracker.net
                 lock (this)
                 {
                     Rectangle rect = new Rectangle(0, 0, this.bitmap.Width, this.bitmap.Height);
-                    BitmapData data = this.bitmap.LockBits(rect, ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                    BitmapData data = this.bitmap.LockBits(rect, ImageLockMode.WriteOnly, 
+                        System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
                     if (this.shouldDrawPixels)
                     {

@@ -38,6 +38,7 @@
             this.panelView.Name = "panelView";
             this.panelView.Size = new System.Drawing.Size(665, 511);
             this.panelView.TabIndex = 0;
+            this.panelView.Visible = false;
             // 
             // Form1
             // 
