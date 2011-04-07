@@ -1,4 +1,6 @@
-﻿using System;
+﻿// This code is an adaptation from an OpenNI sample.
+
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;

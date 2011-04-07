@@ -1,4 +1,7 @@
-﻿using System;
+﻿// NOTE: this code is not the original work of Mike Hodnick.
+// This code is a copy of a code sample from the OpenNI intall.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;

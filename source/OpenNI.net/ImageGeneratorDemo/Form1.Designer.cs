@@ -33,10 +33,12 @@
             // 
             // panelView
             // 
+            this.panelView.AutoSize = true;
+            this.panelView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelView.Location = new System.Drawing.Point(0, 0);
             this.panelView.Name = "panelView";
-            this.panelView.Size = new System.Drawing.Size(665, 511);
+            this.panelView.Size = new System.Drawing.Size(599, 430);
             this.panelView.TabIndex = 0;
             this.panelView.Visible = false;
             // 
@@ -44,11 +46,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 511);
+            this.ClientSize = new System.Drawing.Size(599, 430);
             this.Controls.Add(this.panelView);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
