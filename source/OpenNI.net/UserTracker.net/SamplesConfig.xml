@@ -57,6 +57,7 @@
 			</Configuration>
 		</Node>
 
+    <Node type="Gesture" />
 
     <!--
 		<Node type="Audio" name="Audio1">

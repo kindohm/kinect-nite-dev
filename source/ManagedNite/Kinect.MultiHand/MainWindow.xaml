@@ -1,0 +1,44 @@
+﻿<Window x:Class="KinectMultiHand.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:KinectMultiHand"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <local:ViewModel x:Key="viewModel"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource viewModel}">
+        <Canvas 
+            x:Name="canvas"
+            >
+            <Canvas.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#000000" Offset="0"/>
+                    <GradientStop Color="#333333" Offset=".5" x:Name="bg"/>
+                    <GradientStop Color="#000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+
+        </Canvas>
+
+        
+        <TextBlock
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            FontSize="18"
+            Foreground="#CCCCCC"
+            Text="{Binding TraceListener.Trace}"
+            >
+        </TextBlock>
+
+        <TextBlock
+            x:Name="pointInfo"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            FontSize="18"
+            Foreground="#CCCCCC"
+            >
+        </TextBlock>
+
+
+    </Grid>
+</Window>

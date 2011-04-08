@@ -47,12 +47,14 @@ namespace Swiping
             
             
             var swipeDetector = new XnMSwipeDetector(steadyBeforeSwipe);
+
             swipeDetector.MotionSpeedThreshold = 0.5f;
             swipeDetector.MotionTime = 300;
             swipeDetector.SteadyDuration = 300;
             
             
             swipeDetector.GeneralSwipe += new EventHandler<SwipeDetectorGeneralEventArgs>(swipeDetector_GeneralSwipe);
+
             this.session.AddListener(swipeDetector);
 
 

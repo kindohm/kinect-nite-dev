@@ -113,10 +113,6 @@ namespace CursorClicking2
             this.timer.Start();
         }
 
-        void push_Push(float velocity, float angle)
-        {
-        }
-
         void DoClick()
         {
             mouse_event((int)MouseEventType.LeftDown, (int)Point.X, (int)Point.Y, 0, 0);
