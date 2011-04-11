@@ -13,9 +13,9 @@ namespace FirstKinectProject
             context.Init();
             var session = new XnMSessionManager(context, "Wave", "RaiseHand");
 
+            session.FocusStartDetected += new EventHandler<FocusStartEventArgs>(session_FocusStartDetected);
             session.SessionStarted += new EventHandler<PointEventArgs>(session_SessionStarted);
             session.SessionEnded += new EventHandler(session_SessionEnded);
-            session.FocusStartDetected += new EventHandler<FocusStartEventArgs>(session_FocusStartDetected);
 
             Console.WriteLine("Running. Press any key to exit.");
 

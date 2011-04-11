@@ -81,6 +81,7 @@ namespace CursorClicking2
 
             var push = new XnMPushDetector();
             push.Push += new EventHandler<PushDetectorEventArgs>(push_Push);
+
             this.session.AddListener(push);
 
             var start = new ThreadStart(RunKinect);

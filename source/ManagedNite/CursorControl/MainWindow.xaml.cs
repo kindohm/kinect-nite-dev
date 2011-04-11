@@ -88,9 +88,7 @@ namespace CursorControl
             this.timer.Start();
         }
 
-        void point_PointUpdate(ref HandPointContext context)
-        {
-        }
+      
 
         void RunKinect()
         {
